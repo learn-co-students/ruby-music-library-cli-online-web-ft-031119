@@ -1,8 +1,10 @@
-# require_relative '../lib/moddable.rb'
+require_relative '../lib/concerns/findable.rb'
 class Genre
+  extend Concerns::Findable
   attr_accessor :name
   @@all = []
   def initialize(name)
+    @songs = []
     @name = name
     self.save
   end
@@ -17,5 +19,19 @@ class Genre
   end
   def save
     self.class.all << self
+  end
+  def songs
+    @songs
+  end
+  def add_song(song)
+    if !song.artist
+      song.artist = self
+    end
+    if !self.songs.include?(song)
+      self.songs << song
+    end
+  end
+  def artists
+    (self.songs.collect {|song| song.artist}).uniq
   end
 end
