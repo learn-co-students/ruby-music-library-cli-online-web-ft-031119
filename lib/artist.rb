@@ -1,4 +1,5 @@
-require_relative '../lib/concerns/findable.rb'
+# require_relative '../lib/concerns/findable.rb'
+require_relative '../lib/concerns/concerns.rb'
 class Artist
   extend Concerns::Findable
   attr_accessor :name

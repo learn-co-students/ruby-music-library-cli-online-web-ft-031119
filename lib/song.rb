@@ -1,5 +1,7 @@
 # require_relative '../lib/moddable.rb'
+require_relative '../lib/concerns/concerns.rb'
 class Song
+  extend Concerns::Findable
   attr_accessor :name
   @@all = []
   def initialize(name, artist = nil, genre = nil)
@@ -38,16 +40,15 @@ class Song
   def genre
     @genre
   end
-  def self.find_by_name(name)
-    self.all.find {|song| song.name == name}
+  def self.new_from_filename(filename)
+    artist_name,song_name,genre_name = filename[0,filename.length-4].split(" - ")
+    song = Song.find_or_create_by_name(song_name)
+    song.artist = Artist.find_or_create_by_name(artist_name)
+    song.genre = Genre.find_or_create_by_name(genre_name)
+    return song
   end
-  def self.find_or_create_by_name(name)
-    if self.find_by_name(name)
-      return self.find_by_name(name)
-    else
-      self.create(name)
-    end
-
+  def self.create_from_filename(filename)
+    self.new_from_filename(filename)
   end
 
 end
