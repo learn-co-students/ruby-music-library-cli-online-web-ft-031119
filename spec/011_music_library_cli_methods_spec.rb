@@ -3,7 +3,6 @@ require "spec_helper"
 describe "MusicLibraryController - CLI Methods" do
   let(:music_library_controller) { MusicLibraryController.new("./spec/fixtures/mp3s") }
   let(:other_music_library_controller) { MusicLibraryController.new("./spec/fixtures/other_mp3s") }
-
   describe "#list_songs" do
     it "prints all songs in the music library in a numbered list (alphabetized by song name)" do
       expect($stdout).to receive(:puts).with("1. Thundercat - For Love I Come - dance")
@@ -31,7 +30,6 @@ describe "MusicLibraryController - CLI Methods" do
       expect($stdout).to receive(:puts).with("2. Jurassic 5")
       expect($stdout).to receive(:puts).with("3. Real Estate")
       expect($stdout).to receive(:puts).with("4. Thundercat")
-
       music_library_controller.list_artists
     end
 
