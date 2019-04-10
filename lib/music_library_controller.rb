@@ -48,26 +48,26 @@ class MusicLibraryController
     end
 
     def list_songs
-        alphabetize_songs
+        # alphabetize_songs
         # songs_az = Song.all.sort_by {|song| song.name}
-        @songs_az.each_with_index {|song, index|
-            index += 1
+        alphabetize_songs.each.with_index(1) {|song, index|
+            # index += 1
             puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
         }
     end
 
     def list_artists
         artists_az = Artist.all.sort_by {|artist| artist.name}
-        artists_az.each_with_index {|artist, index|
-            index += 1
+        artists_az.each.with_index(1) {|artist, index|
+            # index += 1
             puts "#{index}. #{artist.name}"
         }
     end
     
     def list_genres
         genres_az = Genre.all.sort_by {|genre| genre.name}
-        genres_az.each_with_index {|genre, index|
-            index += 1
+        genres_az.each.with_index(1) {|genre, index|
+            # index += 1
             puts "#{index}. #{genre.name}"
         }
     end
@@ -77,8 +77,8 @@ class MusicLibraryController
         artist = gets.chomp
         match = Artist.all.detect {|a| a.name == artist}
         if match
-            match.songs.sort_by {|song| song.name}.each_with_index {|s, index| 
-                index += 1
+            match.songs.sort_by {|song| song.name}.each.with_index(1) {|s, index| 
+                # index += 1
                 puts "#{index}. #{s.name} - #{s.genre.name}"
             }
         end
@@ -89,8 +89,8 @@ class MusicLibraryController
         genre = gets.chomp
         match = Genre.all.detect {|g| g.name == genre}
         if match
-            match.songs.sort_by {|song| song.name}.each_with_index {|s, index| 
-                index += 1
+            match.songs.sort_by {|song| song.name}.each.with_index(1) {|s, index| 
+                # index += 1
                 puts "#{index}. #{s.artist.name} - #{s.name}"
             }
         end
@@ -98,11 +98,11 @@ class MusicLibraryController
 
     def play_song
         puts "Which song number would you like to play?"
-        alphabetize_songs
+        # alphabetize_songs
         song_num = gets.chomp.to_i
 
-        if song_num > 0 && song_num <= @songs_az.size
-            song = @songs_az[song_num - 1] 
+        if song_num > 0 && song_num <= alphabetize_songs.size
+            song = alphabetize_songs[song_num - 1] 
             puts "Playing #{song.name} by #{song.artist.name}"
         end
     end
