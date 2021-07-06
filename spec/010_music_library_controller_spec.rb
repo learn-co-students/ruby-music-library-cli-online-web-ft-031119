@@ -1,5 +1,5 @@
 require "spec_helper"
-
+require'pry'
 describe "MusicLibraryController" do
   describe "#initialize" do
     it "accepts one argument, the path to the MP3 files to be imported" do
@@ -14,7 +14,7 @@ describe "MusicLibraryController" do
 
     it "the 'path' argument defaults to './db/mp3s'" do
       expect(MusicImporter).to receive(:new).with("./db/mp3s").and_return(double(MusicImporter, import: true))
-
+    
       MusicLibraryController.new
     end
 
